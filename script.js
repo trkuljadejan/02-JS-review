@@ -146,8 +146,37 @@ function getBook(id) {
 
 //Destructing
 
-const book = getBook(2);
+const book = getBook(1);
+book
 
-const title = book.title
-title
+const { title, author, pages, publicationDate, genres, hasMovieAdaptation } = book;
+
+
+console.log(title, author, genres)
+
+// const primaryGenre = genres[0]
+// const secondaryGenre = genres[1]
+
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres
+
+console.log(primaryGenre, secondaryGenre, otherGenres)
+
+const newGenres = [...genres, "epic fantasy"]
+newGenres
+
+
+const updatedBook = {
+    ...book,
+    moviePublicationDate: "21.9.2001.",
+    //  pages: 1210 
+};
+updatedBook;
+
+
+const summary = `${title},a ${pages}-page long book, written by ${author} and published in ${publicationDate.split('-')[0]}. The movie has ${hasMovieAdaptation ? '' : 'not '}been adapted as a movie.`;
+summary;
+
+
+const pagesRange = pages > 1000 ? 'over a thousand' : 'less than one thousand';
+pagesRange;
 
