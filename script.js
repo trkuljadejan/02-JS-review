@@ -144,9 +144,11 @@ function getBook(id) {
 }
 
 
+/*
 //Destructing
 
-const book = getBook(1);
+// const book = getBook(2);
+const book = getBook(3);
 book
 
 const { title, author, pages, publicationDate, genres, hasMovieAdaptation } = book;
@@ -173,10 +175,81 @@ const updatedBook = {
 updatedBook;
 
 
-const summary = `${title},a ${pages}-page long book, written by ${author} and published in ${publicationDate.split('-')[0]}. The movie has ${hasMovieAdaptation ? '' : 'not '}been adapted as a movie.`;
+// function getYear(str) {
+//     return str.split('-')[0]
+// }
+
+const getYear = (str) => str.split("-")[0];
+console.log(getYear(publicationDate))
+
+const summary = `${title},a ${pages}-page long book, written by ${author} and published in ${getYear(publicationDate)}. The movie has ${hasMovieAdaptation ? '' : 'not '}been adapted as a movie.`;
 summary;
 
 
 const pagesRange = pages > 1000 ? 'over a thousand' : 'less than one thousand';
 pagesRange;
+
+// falsy: false, 0, '', null, undefined
+
+console.log('T' && 'idemo')
+console.log(false && 'idemo')
+
+console.log('T' || 'idemo')
+console.log(false || 'idemo')
+
+const spanisTranslation = book.translations.spanish || 'Not translated'
+spanisTranslation;
+
+console.log(book.reviews.librarything?.reviewsCount);
+const countWrong = book.reviews.librarything?.reviewsCount || "No data";
+countWrong
+
+const count = book.reviews.librarything?.reviewsCount ?? "No data";
+count;
+
+function getTotalReviewCount(book) {
+    const goodread = book.reviews.goodreads.reviewsCount;
+    const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+    return goodread + librarything;
+}
+
+console.log(
+    getTotalReviewCount(book)
+)
+*/
+
+
+function getTotalReviewCount(book) {
+    const goodread = book.reviews.goodreads.reviewsCount;
+    const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+    return goodread + librarything;
+}
+
+const books = getBooks();
+books;
+
+const x = [1, 2, 3, 4, 5].map(el => el * 2);
+console.log(x);
+
+const titles = books.map(book => book.title);
+titles;
+
+const essentialData = books.map(book => (
+    {
+        title: book.title,
+        author: book.author,
+        reviewsCount: getTotalReviewCount(book)
+    }
+));
+
+essentialData;
+
+const longBooksWithMovie = books.filter(book => book.pages > 500).filter(book => book.hasMovieAdaptation);
+longBooksWithMovie;
+
+const adventureBooks = books.filter(books => books.genres.includes('adventure')).map(book => book.title);
+adventureBooks;
+
+
+
 
