@@ -218,7 +218,7 @@ console.log(
 )
 */
 
-
+/*
 function getTotalReviewCount(book) {
     const goodread = book.reviews.goodreads.reviewsCount;
     const librarything = book.reviews.librarything?.reviewsCount ?? 0;
@@ -250,6 +250,46 @@ longBooksWithMovie;
 const adventureBooks = books.filter(books => books.genres.includes('adventure')).map(book => book.title);
 adventureBooks;
 
+const pagesAllBooks = books.reduce((x, book)=> x + book.pages, 0)
+pagesAllBooks
 
+const arr = [3, 7, 1, 9, 6]
+const sorted = arr.slice().sort((a,b) => a - b)
+sorted
+arr
 
+const sortedByPages = books.slice().sort((a,b) => b.pages - a.pages)
+sortedByPages
 
+// add
+const newBook = {
+    id: 6,
+    title: 'Harry Potter',
+    author: 'J. K. Rowling',
+}
+const booksAfterAdd = [...books, newBook]
+booksAfterAdd
+
+// delete
+const bookAfterDelete = booksAfterAdd.filter(book => book.id !== 3)
+bookAfterDelete
+
+// update
+const booksAfterUpdate = bookAfterDelete.map(book => book.id == 6 ? {...book, author: 'Trkulja'} : book)
+booksAfterUpdate
+*/
+
+// fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json()).then(data => console.log(data[0]))
+
+// console.log('trk')
+
+async function getTodos(){
+    const res = await fetch('https://jsonplaceholder.typicode.com/todos')
+    const data = await res.json()
+    console.log(data[0])
+
+    return data;
+}
+
+const todos = getTodos()
+console.log(todos)
